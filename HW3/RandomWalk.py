@@ -52,7 +52,7 @@ def Gauss_Metro(nWalk, mu=0, sigma=1, delta=1, SelfAdopt=0):
             VarX += (x - mu)*(x - mu)
 
         # acceptance can be used as the number of generated number
-        if (NWalk > 100) and SelfAdopt and (abs(VarX/Acceptance - sigma*sigma) <= SelfAdopt):
+        if (NWalk > 10000) and SelfAdopt and (abs(VarX/Acceptance - sigma*sigma) <= SelfAdopt):
             break
         if NWalk >= nWalk: # nWalk here is used as the uplimit
             break
