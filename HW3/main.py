@@ -21,8 +21,9 @@ sigma = 1
 delta = 1
 
 # # an example
+# # generate random numbers
 # RandNums, Accept, VarX, RealWalk = RandomWalk.Gauss_Metro(
-#     1000000, mu, sigma, delta, SelfAdopt=0.3)
+#     1000000, mu, sigma, delta, SelfAdopt=0)
 
 # # Plot
 # plt.hist(RandNums, bins=100, range=[-15, 15], density=True, label="Generated Distribution")
@@ -35,7 +36,9 @@ delta = 1
 # plt.text(-14, 0.08, f"Real number of walk: {RealWalk}")
 # plt.show()
 
-# ----------------------------------------------------
+
+##########################################################
+
 
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
