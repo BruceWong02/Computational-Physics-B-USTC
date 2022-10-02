@@ -31,7 +31,6 @@ def Gauss_Metro(nWalk, mu=0, sigma=1, delta=1, SelfAdopt=0):
                of equilibrium: <(x-mu)^2> approx to sigma^2 
                     while it's value is used as the error
     """
-    i = 0
     NWalk = 0 # real number of walk
 
     x = mu
@@ -40,8 +39,7 @@ def Gauss_Metro(nWalk, mu=0, sigma=1, delta=1, SelfAdopt=0):
     VarX = 0 # <(x-mu)^2>
 
     seed(time())
-    while i < nWalk:
-        i += 1 - (False != SelfAdopt)
+    while True:
         NWalk += 1
 
         eta = uniform(-delta, delta)

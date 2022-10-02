@@ -40,7 +40,7 @@ delta = 1
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
 RealWalks = []
-deltaMid, deltaNum, deltaStep = 4, 200, 0.01
+deltaMid, deltaNum, deltaStep = 5, 100, 0.1
 
 for delta in range(1, deltaNum):
     delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
