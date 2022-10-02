@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 mu = 0
 sigma = 1
-delta = 5
+delta = 1
 
 # # an example
 # RandNums, Accept, VarX, RealWalk = RandomWalk.Gauss_Metro(
@@ -31,22 +31,26 @@ delta = 5
 
 # plt.legend()
 # plt.text(-14, 0.12, f"Acceptance: {Accept}") # text use the same coordinate as the plot
-# plt.text(-14, 0.10, f"$<(x-\mu)^2>$: {VarX}")
+# plt.text(-14, 0.10, f"$\langle (x-\mu)^2 \rangle $: {VarX}")
 # plt.text(-14, 0.08, f"Real number of walk: {RealWalk}")
 # plt.show()
 
+# ----------------------------------------------------
 
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
 RealWalks = []
-for delta in range(1, 20):
+deltaMid, deltaNum, deltaStep = 4, 200, 0.01
+
+for delta in range(1, deltaNum):
+    delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
     RandNums, Accept, VarX, RealWalk = RandomWalk.Gauss_Metro(
-        5000000, mu, sigma, delta, SelfAdopt=0.5)
+        500000, mu, sigma, delta, SelfAdopt=0.1)
     RealWalks.append(RealWalk)
 
 # Plot
 plt.clf()
-plt.plot([i for i in range(1, 20)], RealWalks)
+plt.plot([deltaMid-deltaStep*deltaNum/2+i*deltaStep for i in range(1, deltaNum)], RealWalks)
 plt.xlabel("$\delta$")
 plt.ylabel("number of walk")
 plt.show()

@@ -16,7 +16,7 @@ from random import seed, uniform
 from time import time
 
 
-# Calculate gauss function value
+# Calculate gauss distribution density function value
 def GaussFunc(x, mu, sigma):
     return pow(math.e, -(x-mu)*(x-mu)/(2*sigma*sigma)) / (math.sqrt(2*math.pi) * sigma) 
 
@@ -54,7 +54,7 @@ def Gauss_Metro(nWalk, mu=0, sigma=1, delta=1, SelfAdopt=0):
             VarX += (x - mu)*(x - mu)
 
         # acceptance can be used as the number of generated number
-        if (NWalk > 10000) and SelfAdopt and (abs(VarX/Acceptance - sigma*sigma) <= SelfAdopt):
+        if (NWalk > 100) and SelfAdopt and (abs(VarX/Acceptance - sigma*sigma) <= SelfAdopt):
             break
         if NWalk >= nWalk: # nWalk here is used as the uplimit
             break
