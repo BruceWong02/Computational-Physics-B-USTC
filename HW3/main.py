@@ -20,22 +20,22 @@ mu = 0
 sigma = 1
 delta = 2.08
 
-# an example
-# generate random numbers
-RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
-    1000000, mu, sigma, delta, SelfAdopt=0)
+# # an example
+# # generate random numbers
+# RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
+#     1000000, mu, sigma, delta, SelfAdopt=0)
 
-# Plot
-plt.hist(RandNums, bins=100, range=[-15, 15], density=True, label="Generated Distribution")
-Y = [RandomWalk.GaussFunc(-15+0.1*x, mu, sigma) for x in range(300)]
-plt.plot([-15+0.1*x for x in range(300)], Y, label="Theoratical Distribution")
+# # Plot
+# plt.hist(RandNums, bins=100, range=[-15, 15], density=True, label="Generated Distribution")
+# Y = [RandomWalk.GaussFunc(-15+0.1*x, mu, sigma) for x in range(300)]
+# plt.plot([-15+0.1*x for x in range(300)], Y, label="Theoratical Distribution")
 
-plt.legend()
-plt.text(-14, 0.38, f"Acceptance: {Accept}") # text use the same coordinate as the plot
-plt.text(-14, 0.36, f"$<(x-\mu)^2> $: {VarX}")
-plt.text(-14, 0.34, f"Real number of walk: {RealWalk}")
-plt.text(-14, 0.32, f"number of samples: {samples}")
-plt.show()
+# plt.legend()
+# plt.text(-14, 0.38, f"Acceptance: {Accept}") # text use the same coordinate as the plot
+# plt.text(-14, 0.36, f"$<(x-\mu)^2> $: {VarX}")
+# plt.text(-14, 0.34, f"Real number of walk: {RealWalk}")
+# plt.text(-14, 0.32, f"number of samples: {samples}")
+# plt.show()
 
 
 ##########################################################
@@ -43,19 +43,19 @@ plt.show()
 
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
-RealWalks = []
-deltaMid, deltaNum, deltaStep = 2, 100, 0.001
+Samples = []
+deltaMid, deltaNum, deltaStep = 2, 1500, 0.001
 
 for delta in range(1, deltaNum):
     delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
     RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
-        1000000, mu, sigma, delta, SelfAdopt=0.01)
-    RealWalks.append(RealWalk)
+        1000000, mu, sigma, delta, SelfAdopt=0.05)
+    Samples.append(samples)
 
 # Plot
 plt.clf()
-plt.plot([deltaMid-deltaStep*deltaNum/2+i*deltaStep for i in range(1, deltaNum)], RealWalks)
+plt.plot([deltaMid-deltaStep*deltaNum/2+i*deltaStep for i in range(1, deltaNum)], Samples)
 plt.xlabel("$\delta$")
-plt.ylabel("number of walk")
+plt.ylabel("number of samples")
 plt.show()
 

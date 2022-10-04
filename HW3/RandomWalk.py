@@ -39,7 +39,7 @@ def Gauss_Metro(nSample, mu=0, sigma=1, delta=1, SelfAdopt=0):
 
     x = mu
     xList = [x]
-    Acceptance = 0
+    NWalk = 0
     VarX = 0 # <(x-mu)^2>
 
     seed(time())
@@ -52,19 +52,19 @@ def Gauss_Metro(nSample, mu=0, sigma=1, delta=1, SelfAdopt=0):
             x = x + eta
             xList.append(x)
 
-            Acceptance += 1
+            NWalk += 1
             VarX += (x - mu)*(x - mu)
 
         # acceptance can be used as the number of generated number
-        if (NSample > 10000) and SelfAdopt and (abs(VarX/Acceptance - sigma*sigma) <= SelfAdopt):
+        if (NSample > 10000) and SelfAdopt and (abs(VarX/NWalk - sigma*sigma) <= SelfAdopt):
             flag += 1
         else:
             flag = 0
         if NSample >= nSample or flag >= 5: # nSample here is used as the uplimit
             break
 
-    VarX /= Acceptance
+    VarX /= NWalk
     
-    # Acceptance here is number of walk, Acceptance/NSample is acceptance.
-    return xList, Acceptance/NSample, VarX, Acceptance, NSample
+    # NWalk/NSample is acceptance.
+    return xList, NWalk/NSample, VarX, NWalk, NSample
     

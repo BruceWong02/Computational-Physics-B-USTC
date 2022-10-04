@@ -28,40 +28,46 @@ PB20511896 王金鑫
 
   > Gauss分布密度函数：$f(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
 
-- `Gauss_Metro(nWalk, mu=0, sigma=1, delta=1, SelfAdopt=0) `： 利用Metropolis随机游走方法进行Gauss分布采样
+- `Gauss_Metro(nSample, mu=0, sigma=1, delta=1, SelfAdopt=0) `： 利用Metropolis随机游走方法进行Gauss分布采样
 
   - 参数说明
 
-    `nWalk`: 在$SelfAdopt=0$ 时，作为游走的次数；
+    `nSample`: 在$SelfAdopt=0$ 时，作为采样的次数；
 
-    ​			 在$SelfAdopt\neq 0$ 时，作为游走次数的上限，避免死循环或长时间无法跳出循环。
+    ​			 在$SelfAdopt\neq 0$ 时，作为采样次数的上限，避免死循环或长时间无法跳出循环。
 
     `delta`: 游走的步长
 
-    `SelfAdopt`: 等于0时，采用规定次数的游走；
+    `SelfAdopt`: 等于0时，采用规定次数的采样；
 
-    ​				   不等于0时，采用“平衡条件”（$\langle (x-\mu)^2 \rangle \approx \sigma^2$）作为停止游走的判据。同时为防止长时间无法跳出循环，需要设置一个游走上限，在这里将`nWalk`作为上限的数值。
+    ​				   不等于0时，采用“平衡条件”（$\langle (x-\mu)^2 \rangle \approx \sigma^2$）作为停止游走的判据。同时为防止长时间无法跳出循环，需要设置一个采样上限，在这里将`nSample`作为上限的数值。
 
-    >  对于某些delta值，即使误差放到 $abs(\langle (x-\mu)^2 \rangle - \sigma^2) \le 0.5$ ，在游走了$10^6$步后仍然没有达到平衡条件。
+    >  对于某些delta值，即使误差放到 $abs(\langle (x-\mu)^2 \rangle - \sigma^2) \le 0.5$ ，在采样了$10^6$步后仍然没有达到平衡条件。
 
   - 内部参数说明
 
-    `Acceptance`: 接受度，即$\frac{得到的随机数数目}{随机游走的总次数}$。
+    `NSample`: 实际采样的次数。
 
     `NWalk`: 随机游走的实际数目
 
     `VarX`: $(x-\mu)^2$ 的均值 $\langle (x-\mu)^2 \rangle$
 
     `xList`: 产生的随机数列表
+    
+  - 返回参数
+  
+    `xList, NWalk/NSample, VarX, NWalk, NSample`
+  
+    其中`NWalk/NSample`为接受度(Acceptance)，即$\frac{随机游走的次数}{采样的次数}$
 
 
 ### 运行说明
 
 打开main.py，
 
-- 事例部分：可修改`mu, sigma, delta`的数值来得到不同的Gauss分布密度函数。游走的次数默认为$10^6$， 默认`SelfAdopt`=0，但都可自行修改。最终的结果会将理论曲线和产生的分布进行比较，同时展示`VarX`和`Acceptance`的数值。
+- 事例部分：可修改`mu, sigma, delta`的数值来得到不同的Gauss分布密度函数。采样的次数默认为$10^6$， 默认`SelfAdopt`=0，但都可自行修改。最终的结果会将理论曲线和产生的分布进行比较，同时展示`VarX`和`Acceptance`的数值。
 
-- 探究最大试探步长$\delta$和达到平衡分布的时间部分：在这里用随机游走的次数来表示达到平衡分布的时间。取一系列$\delta$进行随机游走，得到随机游走的次数，做出两者关系曲线。可以通过更改相关参数来实现不同程度的探究。这里的delta序列为一个等差数列。
+- 探究最大试探步长$\delta$和达到平衡分布的时间部分：在这里用采样的次数来表示达到平衡分布的时间。取一系列$\delta$进行随机游走，得到随机游走的次数，做出两者关系曲线。可以通过更改相关参数来实现不同程度的探究。这里的delta序列为一个等差数列。
 
   `deltaMid`：序列的中心值
 
