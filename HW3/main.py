@@ -18,11 +18,11 @@ import matplotlib.pyplot as plt
 
 mu = 0
 sigma = 1
-delta = 2.09
+delta = 2.08
 
 # an example
 # generate random numbers
-RandNums, Accept, VarX, RealWalk = RandomWalk.Gauss_Metro(
+RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
     1000000, mu, sigma, delta, SelfAdopt=0)
 
 # Plot
@@ -34,6 +34,7 @@ plt.legend()
 plt.text(-14, 0.38, f"Acceptance: {Accept}") # text use the same coordinate as the plot
 plt.text(-14, 0.36, f"$<(x-\mu)^2> $: {VarX}")
 plt.text(-14, 0.34, f"Real number of walk: {RealWalk}")
+plt.text(-14, 0.32, f"number of samples: {samples}")
 plt.show()
 
 
@@ -47,8 +48,8 @@ deltaMid, deltaNum, deltaStep = 2, 100, 0.001
 
 for delta in range(1, deltaNum):
     delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
-    RandNums, Accept, VarX, RealWalk = RandomWalk.Gauss_Metro(
-        500000, mu, sigma, delta, SelfAdopt=0.01)
+    RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
+        1000000, mu, sigma, delta, SelfAdopt=0.01)
     RealWalks.append(RealWalk)
 
 # Plot
