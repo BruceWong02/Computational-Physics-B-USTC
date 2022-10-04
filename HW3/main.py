@@ -33,8 +33,8 @@ delta = 2.08
 # plt.legend()
 # plt.text(-14, 0.38, f"Acceptance: {Accept}") # text use the same coordinate as the plot
 # plt.text(-14, 0.36, f"$<(x-\mu)^2> $: {VarX}")
-# plt.text(-14, 0.34, f"Real number of walk: {RealWalk}")
-# plt.text(-14, 0.32, f"number of samples: {samples}")
+# plt.text(-14, 0.34, f"Number of walk: {RealWalk}")
+# plt.text(-14, 0.32, f"Number of samples: {samples}")
 # plt.show()
 
 
@@ -44,12 +44,12 @@ delta = 2.08
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
 Samples = []
-deltaMid, deltaNum, deltaStep = 3, 150, 0.01
+deltaMid, deltaNum, deltaStep = 2.1, 400, 0.0001
 
 for delta in range(1, deltaNum):
     delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
     RandNums, Accept, VarX, RealWalk, samples = RandomWalk.Gauss_Metro(
-        1000000, mu, sigma, delta, SelfAdopt=0.05)
+        1000000, mu, sigma, delta, SelfAdopt=0.005)
     Samples.append(samples)
 
 # Plot
