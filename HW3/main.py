@@ -44,7 +44,7 @@ delta = 2.08
 # check relationship of delta and number of walk when 
 # arrive the condition of equilibrium
 Samples = []
-deltaMid, deltaNum, deltaStep = 2, 1500, 0.001
+deltaMid, deltaNum, deltaStep = 3, 150, 0.01
 
 for delta in range(1, deltaNum):
     delta = deltaStep*delta + deltaMid - deltaStep*deltaNum / 2
